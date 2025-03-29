@@ -16,6 +16,8 @@ from flet.core.types import (
     ScaleValue,
 )
 
+__all__ = ["Rive"]
+
 
 class Rive(ConstrainedControl):
     """
