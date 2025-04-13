@@ -3,21 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:rive/rive.dart';
 
 class RiveControl extends StatefulWidget {
-  final Control? parent;
   final Control control;
-  final List<Control> children;
-  final bool parentDisabled;
-  final bool? parentAdaptive;
-  final FletControlBackend backend;
 
-  const RiveControl(
-      {super.key,
-      required this.parent,
-      required this.control,
-      required this.children,
-      required this.parentDisabled,
-      required this.parentAdaptive,
-      required this.backend});
+  const RiveControl({super.key, required this.control});
 
   @override
   State<RiveControl> createState() => _RiveControlState();
@@ -27,23 +15,21 @@ class _RiveControlState extends State<RiveControl> with FletStoreMixin {
   @override
   Widget build(BuildContext context) {
     debugPrint("Rive build: ${widget.control.id} (${widget.control.hashCode})");
-    bool disabled = widget.control.isDisabled || widget.parentDisabled;
-    Widget? placeholder;
-
-    var src = widget.control.attrString("src", "")!;
-    if (src == "") {
+    var src = widget.control.getString("src");
+    if (src == null) {
       return const ErrorControl("Rive must have \"src\" specified.");
     }
 
-    var artBoard = widget.control.attrString("artBoard");
-    var antiAliasing = widget.control.attrBool("enableAntiAliasing", true)!;
-    var useArtBoardSize = widget.control.attrBool("useArtBoardSize", false)!;
-    var fit = parseBoxFit(widget.control.attrString("fit"));
-    var alignment = parseAlignment(widget.control, "alignment");
-    var ctrls = widget.children.where((c) => c.isVisible);
-    if (ctrls.isNotEmpty) {
-      placeholder = createControl(widget.control, ctrls.first.id, disabled);
-    }
+    var artBoard = widget.control.getString("art_board");
+    var antiAliasing = widget.control.getBool("enable_anti_aliasing", true)!;
+    var useArtBoardSize = widget.control.getBool("use_art_board_size", false)!;
+    var fit = widget.control.getBoxFit("fit");
+    var alignment = widget.control.getAlignment("alignment");
+    var placeholder = widget.control.buildWidget("placeholder");
+    var speedMultiplier = widget.control.getDouble("speed_multiplier", 1)!;
+    var animations = widget.control.get<List<String>>("animations", const [])!;
+    var stateMachines =
+        widget.control.get<List<String>>("state_machines", const [])!;
 
     return withPageArgs((context, pageArgs) {
       Widget? rive;
@@ -59,6 +45,9 @@ class _RiveControlState extends State<RiveControl> with FletStoreMixin {
           useArtboardSize: useArtBoardSize,
           alignment: alignment,
           placeHolder: placeholder,
+          speedMultiplier: speedMultiplier,
+          animations: animations,
+          stateMachines: stateMachines,
         );
       } else {
         // URL
@@ -70,11 +59,14 @@ class _RiveControlState extends State<RiveControl> with FletStoreMixin {
           antialiasing: antiAliasing,
           useArtboardSize: useArtBoardSize,
           placeHolder: placeholder,
+          speedMultiplier: speedMultiplier,
+          animations: animations,
+          stateMachines: stateMachines,
           // onInit: _onInit,
         );
       }
 
-      return constrainedControl(context, rive, widget.parent, widget.control);
+      return ConstrainedControl(control: widget.control, child: rive);
     });
   }
 }
