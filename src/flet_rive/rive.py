@@ -1,5 +1,5 @@
 from dataclasses import field
-from typing import Optional, List
+from typing import List, Optional
 
 import flet as ft
 
@@ -17,9 +17,9 @@ class Rive(ft.ConstrainedControl):
     """
 
     src: str
-    placeholder: Optional[ft.Control] = None
+    placeholder: ft.OptionalControl = None
     artboard: Optional[str] = None
-    alignment: Optional[ft.Alignment] = None
+    alignment: ft.OptionalAlignment = None
     enable_antialiasing: bool = True
     use_artboard_size: bool = False
     fit: Optional[ft.ImageFit] = None
