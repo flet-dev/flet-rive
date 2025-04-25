@@ -1,17 +1,23 @@
 import flet as ft
 
-import flet_rive as fr
+import flet_rive as ftr
 
 
 def main(page):
     page.add(
-        fr.Rive(
+        ftr.Rive(
             "https://cdn.rive.app/animations/vehicles.riv",
             placeholder=ft.ProgressBar(),
             width=300,
             height=200,
-        )
+        ),
+        ftr.Rive(
+            "vehicles.riv",
+            placeholder=ft.ProgressBar(),
+            width=300,
+            height=200,
+        ),
     )
 
 
-ft.app(main)
+ft.run(main, assets_dir="assets")
