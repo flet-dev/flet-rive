@@ -15,9 +15,12 @@ dependencies:
   collection: ^1.16.0
   rive: 0.13.20
 
-  # flet: 0.70.3
+  # flet: 0.70.0
   flet:
-    path: /Users/ndonkohenri/PycharmProjects/flet-dev/flet/packages/flet
+    git:
+      url: https://github.com/flet-dev/flet.git
+      path: packages/flet
+      ref: v1
 
 dev_dependencies:
   flutter_test:
