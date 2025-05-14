@@ -11,7 +11,7 @@ class RiveControl extends StatefulWidget {
   State<RiveControl> createState() => _RiveControlState();
 }
 
-class _RiveControlState extends State<RiveControl> with FletStoreMixin {
+class _RiveControlState extends State<RiveControl> {
   @override
   Widget build(BuildContext context) {
     debugPrint("Rive build: ${widget.control.id} (${widget.control.hashCode})");
@@ -30,43 +30,46 @@ class _RiveControlState extends State<RiveControl> with FletStoreMixin {
     var animations = widget.control.get<List<String>>("animations", const [])!;
     var stateMachines =
         widget.control.get<List<String>>("state_machines", const [])!;
+    var headers = widget.control.get("headers")?.cast<String, String>();
+    var clipRect = widget.control.getRect("clip_rect");
 
-    return withPageArgs((context, pageArgs) {
-      Widget? rive;
+    Widget? rive;
 
-      var assetSrc = getAssetSrc(src, pageArgs.pageUri!, pageArgs.assetsDir);
-      if (assetSrc.isFile) {
-        // Local File
-        rive = RiveAnimation.file(
-          assetSrc.path,
-          artboard: artBoard,
-          fit: fit,
-          antialiasing: antiAliasing,
-          useArtboardSize: useArtBoardSize,
-          alignment: alignment,
-          placeHolder: placeholder,
-          speedMultiplier: speedMultiplier,
-          animations: animations,
-          stateMachines: stateMachines,
-        );
-      } else {
-        // URL
-        rive = RiveAnimation.network(
-          assetSrc.path,
-          fit: fit,
-          artboard: artBoard,
-          alignment: alignment,
-          antialiasing: antiAliasing,
-          useArtboardSize: useArtBoardSize,
-          placeHolder: placeholder,
-          speedMultiplier: speedMultiplier,
-          animations: animations,
-          stateMachines: stateMachines,
-          // onInit: _onInit,
-        );
-      }
+    var assetSrc = widget.control.backend.getAssetSource(src);
+    if (assetSrc.isFile) {
+      // Local File
+      rive = RiveAnimation.file(
+        assetSrc.path,
+        artboard: artBoard,
+        fit: fit,
+        antialiasing: antiAliasing,
+        useArtboardSize: useArtBoardSize,
+        alignment: alignment,
+        placeHolder: placeholder,
+        speedMultiplier: speedMultiplier,
+        animations: animations,
+        stateMachines: stateMachines,
+        clipRect: clipRect,
+      );
+    } else {
+      // URL
+      rive = RiveAnimation.network(
+        assetSrc.path,
+        fit: fit,
+        artboard: artBoard,
+        alignment: alignment,
+        antialiasing: antiAliasing,
+        useArtboardSize: useArtBoardSize,
+        placeHolder: placeholder,
+        speedMultiplier: speedMultiplier,
+        animations: animations,
+        stateMachines: stateMachines,
+        headers: headers,
+        clipRect: clipRect,
+        // onInit: _onInit,
+      );
+    }
 
-      return ConstrainedControl(control: widget.control, child: rive);
-    });
+    return ConstrainedControl(control: widget.control, child: rive);
   }
 }
