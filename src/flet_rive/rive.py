@@ -10,10 +10,6 @@ __all__ = ["Rive"]
 class Rive(ft.ConstrainedControl):
     """
     Displays rive animations.
-
-    -----
-
-    Online docs: https://flet.dev/docs/controls/rive
     """
 
     src: str
@@ -88,6 +84,7 @@ class Rive(ft.ConstrainedControl):
     clip_rect: Optional[ft.Rect] = None
     """
     Clip the artboard to this rect.
+    
     If not supplied it'll default to the constraint size provided by the parent widget. 
     Unless the Artboard has clipping disabled, then no clip will be applied.
     """

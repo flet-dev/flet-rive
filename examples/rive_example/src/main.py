@@ -3,16 +3,16 @@ import flet as ft
 import flet_rive as ftr
 
 
-def main(page):
+def main(page: ft.Page):
     page.add(
         ftr.Rive(
-            "https://cdn.rive.app/animations/vehicles.riv",
+            src="https://cdn.rive.app/animations/vehicles.riv",
             placeholder=ft.ProgressBar(),
             width=300,
             height=200,
         ),
         ftr.Rive(
-            "vehicles.riv",
+            src="vehicles.riv",
             placeholder=ft.ProgressBar(),
             width=300,
             height=200,
