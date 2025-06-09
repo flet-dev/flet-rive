@@ -11,7 +11,7 @@ on:
       - 'mkdocs.yml'
       - 'pyproject.toml'
       - '.github/workflows/docs.yml'
-      - 'src/flet_rive'
+      - 'src/flet_rive/**'
       - 'examples/rive_example/src/main.py'
 
   workflow_dispatch:    # Allow manual trigger from the GitHub Actions UI
