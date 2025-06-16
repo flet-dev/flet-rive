@@ -18,7 +18,7 @@ class Rive(ft.ConstrainedControl):
     Can either be a URL or a path to a local asset file.
     """
 
-    placeholder: ft.OptionalControl = None
+    placeholder: Optional[ft.Control] = None
     """
     Control displayed while the Rive is loading.
     """
@@ -29,7 +29,7 @@ class Rive(ft.ConstrainedControl):
     If not specified, the default artboard of the provided `src` is used.
     """
 
-    alignment: ft.OptionalAlignment = None
+    alignment: Optional[ft.Alignment] = None
     """
     Alignment for the animation in the Rive control.
     """
