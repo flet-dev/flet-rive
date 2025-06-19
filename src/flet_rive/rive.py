@@ -37,8 +37,6 @@ class Rive(ft.ConstrainedControl):
     enable_antialiasing: bool = True
     """
     Whether to enable anti-aliasing when rendering.
-    
-    Defaults to `True`.
     """
 
     use_artboard_size: bool = False
@@ -46,8 +44,6 @@ class Rive(ft.ConstrainedControl):
     Determines whether to use the inherent size of the artboard, 
     i.e. the absolute size defined by the artboard, 
     or size the control based on the available constraints only (sized by parent).
-    
-    Defaults to `False`.
     """
 
     fit: Optional[ft.BoxFit] = None
@@ -58,22 +54,16 @@ class Rive(ft.ConstrainedControl):
     speed_multiplier: ft.Number = 1.0
     """
     A multiplier for controlling the speed of the Rive animation playback.
-    
-    Defaults to `1.0`.
     """
 
     animations: List[str] = field(default_factory=list)
     """
     List of animations to play; default animation is played if empty.
-    
-    Defaults to `[]`.
     """
 
     state_machines: List[str] = field(default_factory=list)
     """
     List of state machines to play; none will play if empty.
-    
-    Defaults to `[]`.
     """
 
     headers: Optional[Dict[str, str]] = None

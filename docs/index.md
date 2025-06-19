@@ -21,6 +21,32 @@ This package supports the following platforms:
 | Android  |     ✅     |
 | Web      |     ✅     |
 
+## Usage
+
+### Installation
+
+To install the `flet-rive` package and add it to your project dependencies:
+
+=== "uv"
+
+```bash
+uv add flet-rive
+```
+
+=== "pip"
+
+```bash
+pip install flet-rive
+```
+
+    You will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+
+=== "poetry"
+
+```bash
+poetry add flet-rive
+```
+
 ## Example
 
 ```python title="main.py"
