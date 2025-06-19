@@ -28,24 +28,21 @@ This package supports the following platforms:
 To install the `flet-rive` package and add it to your project dependencies:
 
 === "uv"
-
-```bash
-uv add flet-rive
-```
+    ```bash
+    uv add flet-rive
+    ```
 
 === "pip"
-
-```bash
-pip install flet-rive
-```
-
-    You will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+    ```bash
+    pip install flet-rive  # (1)!
+    ```
 
 === "poetry"
+    ```bash
+    poetry add flet-rive
+    ```
 
-```bash
-poetry add flet-rive
-```
+1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
 
 ## Example
 
