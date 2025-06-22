@@ -1,1 +1,1 @@
-from flet_rive.rive import Rive
+from .rive import Rive as Rive

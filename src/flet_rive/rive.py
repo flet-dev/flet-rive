@@ -1,5 +1,5 @@
 from dataclasses import field
-from typing import Dict, List, Optional
+from typing import Optional
 
 import flet as ft
 
@@ -56,17 +56,17 @@ class Rive(ft.ConstrainedControl):
     A multiplier for controlling the speed of the Rive animation playback.
     """
 
-    animations: List[str] = field(default_factory=list)
+    animations: list[str] = field(default_factory=list)
     """
     List of animations to play; default animation is played if empty.
     """
 
-    state_machines: List[str] = field(default_factory=list)
+    state_machines: list[str] = field(default_factory=list)
     """
     List of state machines to play; none will play if empty.
     """
 
-    headers: Optional[Dict[str, str]] = None
+    headers: Optional[dict[str, str]] = None
     """
     Headers for network requests.
     """
