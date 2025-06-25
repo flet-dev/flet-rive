@@ -4,7 +4,7 @@
 [![downloads](https://static.pepy.tech/badge/flet-rive/month)](https://pepy.tech/project/flet-rive)
 [![license](https://img.shields.io/github/license/flet-dev/flet-rive.svg)](https://github.com/flet-dev/flet-rive/blob/main/LICENSE)
 
-A cross-platform Flet extension for displaying [Rive](https://rive.app/) animations.
+A cross-platform [Flet](https://flet.dev) extension for displaying [Rive](https://rive.app/) animations.
 
 It is based on the [rive](https://pub.dev/packages/rive) Flutter package.
 
