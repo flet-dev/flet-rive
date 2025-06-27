@@ -8,10 +8,6 @@ A cross-platform [Flet](https://flet.dev) extension for displaying [Rive](https:
 
 It is based on the [rive](https://pub.dev/packages/rive) Flutter package.
 
-## Documentation
-
-Detailed documentation to this package can be found [here](https://flet-dev.github.io/flet-rive/).
-
 ## Platform Support
 
 This package supports the following platforms:
@@ -25,22 +21,32 @@ This package supports the following platforms:
 | Android  |     ✅     |
 | Web      |     ✅     |
 
-## Installation
+## Usage
+
+### Installation
 
 To install the `flet-rive` package and add it to your project dependencies:
 
-- Using `uv`:
+=== "uv"
     ```bash
     uv add flet-rive
     ```
 
-- Using `pip`:
+=== "pip"
     ```bash
-    pip install flet-rive
+    pip install flet-rive  # (1)!
     ```
-    After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
 
-- Using `poetry`:
+    1. After this, you will have to manually add this package to your `requirements.txt` or `pyproject.toml`.
+
+=== "poetry"
     ```bash
     poetry add flet-rive
     ```
+
+
+## Example
+
+```python title="main.py"
+--8<-- "examples/rive_example/src/main.py"
+``` 

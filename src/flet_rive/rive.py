@@ -1,187 +1,80 @@
-from typing import Any, Optional, Union
+from dataclasses import field
+from typing import Optional
 
-from flet.core.alignment import Alignment
-from flet.core.animation import AnimationValue
-from flet.core.badge import BadgeValue
-from flet.core.constrained_control import ConstrainedControl
-from flet.core.control import Control, OptionalNumber
-from flet.core.ref import Ref
-from flet.core.tooltip import TooltipValue
-from flet.core.types import (
-    ImageFit,
-    OffsetValue,
-    OptionalControlEventCallable,
-    ResponsiveNumber,
-    RotateValue,
-    ScaleValue,
-)
+import flet as ft
+
+__all__ = ["Rive"]
 
 
-class Rive(ConstrainedControl):
+@ft.control("Rive")
+class Rive(ft.ConstrainedControl):
     """
     Displays rive animations.
-
-    -----
-
-    Online docs: https://flet.dev/docs/controls/rive
     """
 
-    def __init__(
-        self,
-        src: str,
-        placeholder: Optional[Control] = None,
-        artboard: Optional[str] = None,
-        alignment: Optional[Alignment] = None,
-        enable_antialiasing: Optional[bool] = None,
-        use_artboard_size: Optional[bool] = None,
-        fit: Optional[ImageFit] = None,
-        #
-        # ConstrainedControl
-        #
-        ref: Optional[Ref] = None,
-        key: Optional[str] = None,
-        width: OptionalNumber = None,
-        height: OptionalNumber = None,
-        left: OptionalNumber = None,
-        top: OptionalNumber = None,
-        right: OptionalNumber = None,
-        bottom: OptionalNumber = None,
-        expand: Union[None, bool, int] = None,
-        expand_loose: Optional[bool] = None,
-        col: Optional[ResponsiveNumber] = None,
-        opacity: OptionalNumber = None,
-        rotate: RotateValue = None,
-        scale: ScaleValue = None,
-        offset: OffsetValue = None,
-        aspect_ratio: OptionalNumber = None,
-        animate_opacity: Optional[AnimationValue] = None,
-        animate_size: Optional[AnimationValue] = None,
-        animate_position: Optional[AnimationValue] = None,
-        animate_rotation: Optional[AnimationValue] = None,
-        animate_scale: Optional[AnimationValue] = None,
-        animate_offset: Optional[AnimationValue] = None,
-        on_animation_end: OptionalControlEventCallable = None,
-        tooltip: TooltipValue = None,
-        badge: Optional[BadgeValue] = None,
-        visible: Optional[bool] = None,
-        disabled: Optional[bool] = None,
-        data: Any = None,
-        rtl: Optional[bool] = None,
-    ):
-        ConstrainedControl.__init__(
-            self,
-            ref=ref,
-            key=key,
-            width=width,
-            height=height,
-            left=left,
-            top=top,
-            right=right,
-            bottom=bottom,
-            expand=expand,
-            expand_loose=expand_loose,
-            col=col,
-            opacity=opacity,
-            rotate=rotate,
-            scale=scale,
-            offset=offset,
-            aspect_ratio=aspect_ratio,
-            animate_opacity=animate_opacity,
-            animate_size=animate_size,
-            animate_position=animate_position,
-            animate_rotation=animate_rotation,
-            animate_scale=animate_scale,
-            animate_offset=animate_offset,
-            on_animation_end=on_animation_end,
-            tooltip=tooltip,
-            badge=badge,
-            visible=visible,
-            disabled=disabled,
-            data=data,
-            rtl=rtl,
-        )
+    src: str
+    """
+    The source of your rive animation. 
+    Can either be a URL or a path to a local asset file.
+    """
 
-        self.src = src
-        self.placeholder = placeholder
-        self.artboard = artboard
-        self.enable_antialiasing = enable_antialiasing
-        self.use_artboard_size = use_artboard_size
-        self.alignment = alignment
-        self.fit = fit
+    placeholder: Optional[ft.Control] = None
+    """
+    Control displayed while the Rive is loading.
+    """
 
-    def _get_control_name(self):
-        return "rive"
+    artboard: Optional[str] = None
+    """
+    The name of the artboard to use. 
+    If not specified, the default artboard of the provided `src` is used.
+    """
 
-    def before_update(self):
-        super().before_update()
-        assert self.src, "src must be provided"
-        self._set_attr_json("alignment", self.__alignment)
+    alignment: Optional[ft.Alignment] = None
+    """
+    Alignment for the animation in the Rive control.
+    """
 
-    def _get_children(self):
-        if self.__placeholder:
-            return [self.__placeholder]
-        return []
+    enable_antialiasing: bool = True
+    """
+    Whether to enable anti-aliasing when rendering.
+    """
 
-    # src
-    @property
-    def src(self) -> Optional[str]:
-        return self._get_attr("src")
+    use_artboard_size: bool = False
+    """
+    Determines whether to use the inherent size of the artboard, 
+    i.e. the absolute size defined by the artboard, 
+    or size the control based on the available constraints only (sized by parent).
+    """
 
-    @src.setter
-    def src(self, value: Optional[str]):
-        self._set_attr("src", value)
+    fit: Optional[ft.BoxFit] = None
+    """
+    The animation's fit.
+    """
 
-    # alignment
-    @property
-    def alignment(self) -> Optional[Alignment]:
-        return self.__alignment
+    speed_multiplier: ft.Number = 1.0
+    """
+    A multiplier for controlling the speed of the Rive animation playback.
+    """
 
-    @alignment.setter
-    def alignment(self, value: Optional[Alignment]):
-        self.__alignment = value
+    animations: list[str] = field(default_factory=list)
+    """
+    List of animations to play; default animation is played if empty.
+    """
 
-    # artboard
-    @property
-    def artboard(self):
-        return self._get_attr("artBoard")
+    state_machines: list[str] = field(default_factory=list)
+    """
+    List of state machines to play; none will play if empty.
+    """
 
-    @artboard.setter
-    def artboard(self, value):
-        self._set_attr("artBoard", value)
+    headers: Optional[dict[str, str]] = None
+    """
+    Headers for network requests.
+    """
 
-    # enable_antialiasing
-    @property
-    def enable_antialiasing(self) -> bool:
-        return self._get_attr("enableAntiAliasing", def_value=True, data_type="bool")
-
-    @enable_antialiasing.setter
-    def enable_antialiasing(self, value: Optional[bool]):
-        self._set_attr("enableAntiAliasing", value)
-
-    # placeholder
-    @property
-    def placeholder(self) -> Optional[Control]:
-        return self.__placeholder
-
-    @placeholder.setter
-    def placeholder(self, value: Optional[Control]):
-        self.__placeholder = value
-
-    # use_artboard_size
-    @property
-    def use_artboard_size(self) -> bool:
-        return self._get_attr("useArtBoardSize", def_value=False, data_type="bool")
-
-    @use_artboard_size.setter
-    def use_artboard_size(self, value: Optional[bool]):
-        self._set_attr("useArtBoardSize", value)
-
-    # fit
-    @property
-    def fit(self) -> Optional[ImageFit]:
-        return self.__fit
-
-    @fit.setter
-    def fit(self, value: Optional[ImageFit]):
-        self.__fit = value
-        self._set_enum_attr("fit", value, ImageFit)
+    clip_rect: Optional[ft.Rect] = None
+    """
+    Clip the artboard to this rect.
+    
+    If not supplied it'll default to the constraint size provided by the parent widget. 
+    Unless the Artboard has clipping disabled, then no clip will be applied.
+    """
