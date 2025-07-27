@@ -14,7 +14,8 @@ class Rive(ft.ConstrainedControl):
 
     src: str
     """
-    The source of your rive animation. 
+    The source of your rive animation.
+
     Can either be a URL or a path to a local asset file.
     """
 
@@ -25,7 +26,7 @@ class Rive(ft.ConstrainedControl):
 
     artboard: Optional[str] = None
     """
-    The name of the artboard to use. 
+    The name of the artboard to use.
     If not specified, the default artboard of the provided `src` is used.
     """
 
@@ -41,8 +42,8 @@ class Rive(ft.ConstrainedControl):
 
     use_artboard_size: bool = False
     """
-    Determines whether to use the inherent size of the artboard, 
-    i.e. the absolute size defined by the artboard, 
+    Determines whether to use the inherent size of the artboard,
+    i.e. the absolute size defined by the artboard,
     or size the control based on the available constraints only (sized by parent).
     """
 
@@ -74,7 +75,8 @@ class Rive(ft.ConstrainedControl):
     clip_rect: Optional[ft.Rect] = None
     """
     Clip the artboard to this rect.
-    
-    If not supplied it'll default to the constraint size provided by the parent widget. 
+
+    If not supplied it'll default to the constraint size provided by the parent
+    control.
     Unless the Artboard has clipping disabled, then no clip will be applied.
     """
