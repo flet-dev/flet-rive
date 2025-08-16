@@ -1,3 +1,3 @@
-from .rive import Rive as Rive
+from flet_rive.rive import Rive as Rive
 
 __all__ = ["Rive"]
