@@ -44,9 +44,6 @@ To install the `flet-rive` package and add it to your project dependencies:
     poetry add flet-rive
     ```
 
+### Examples
 
-## Example
-
-```python title="main.py"
---8<-- "examples/rive_example/src/main.py"
-``` 
+See [these](rive.md#examples).
