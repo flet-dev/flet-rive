@@ -1,3 +1,7 @@
+# THIS PROJECT HAS BEEN ARCHIVED
+
+`flet-rive` is now part of the main [Flet repository](https://github.com/flet-dev/flet/tree/main/sdk/python/packages/flet-rive).
+
 # flet-rive
 
 [![pypi](https://img.shields.io/pypi/v/flet-rive.svg)](https://pypi.python.org/pypi/flet-rive)
